@@ -1,0 +1,43 @@
+outilgestion_projet=# insert into role values (1,'developpeur');
+INSERT 0 1
+outilgestion_projet=# insert into role values (2,'developpeur_backend');
+INSERT 0 1
+outilgestion_projet=# insert into role values (3,'developpeur_frontend');
+INSERT 0 1
+outilgestion_projet=# insert into role values (4,'chef_projet');
+INSERT 0 1
+outilgestion_projet=# insert into role values (5,'administrateur');
+INSERT 0 1
+outilgestion_projet=# insert into role values (6,'administrateur_system');
+INSERT 0 1
+outilgestion_projet=# insert into role values (7,'devOps');
+
+outilgestion_projet=# insert into task values (1,'2022-09-12', '2022-09-06', 'login',1,1);
+INSERT 0 1
+outilgestion_projet=# insert into task values (2,'2022-09-10', '2022-09-04', 'page_acceuil',2,2);
+INSERT 0 1
+outilgestion_projet=# insert into task values (3,'2022-09-07', '2022-09-01', 'footer',3,3);
+INSERT 0 1
+outilgestion_projet=# insert into task values (4,'2022-09-07', '2022-09-01', 'menu',4,1);
+INSERT 0 1
+outilgestion_projet=# insert into task values (5,'2022-09-07', '2022-09-01', 'create_account',5,2);
+INSERT 0 1
+outilgestion_projet=# insert into task values (6,'2022-09-07', '2022-09-01', 'welcome_page',6,3);
+INSERT 0 1
+
+
+outilgestion_projet=# insert into "user" values (1,'hazan@gmail.com','hazan','chamkiran', 'hazan', 1,1);
+INSERT 0 1
+outilgestion_projet=# insert into "user" values (1,'ece@gmail.com','ece','chamkiran', 'ece', 2,2);
+ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « user_pkey »
+DÉTAIL : La clé « (id)=(1) » existe déjà.
+outilgestion_projet=# insert into "user" values (2,'ece@gmail.com','ece','chamkiran', 'ece', 2,2);
+INSERT 0 1
+outilgestion_projet=# insert into "user" values (3,'fazilet@gmail.com','fazilet','chamkiran', 'fazilet', 3,3);
+INSERT 0 1
+outilgestion_projet=# insert into "user" values (4,'yagiz@gmail.com','yagiz','egemen', 'yagiz',4,4);
+INSERT 0 1
+outilgestion_projet=# insert into "user" values (5,'sinan@gmail.com','sinan','egemen', 'sinan',5,5);
+INSERT 0 1
+outilgestion_projet=# insert into "user" values (6,'Gokan@gmail.com','gokan','egemen', 'gokan',6,6);
+INSERT 0 1
