@@ -1,0 +1,462 @@
+openapi: '3.0.2'
+info:
+  title: Outils Gestion Projet
+  version: '1.0'
+servers:
+  - url: https://api.gestion_projet.test/v1
+tags:
+  - name: Project
+  - name: User
+  - name: Task
+  - name: Role
+  - name: Status
+  
+paths:
+  /project:
+    get:
+      tags:
+        - "Project"
+      summary: Get list of "Projects
+      operationId: getProject
+      parameters:
+        - name: "project"
+          in: query
+          required: false
+          schema:
+            type: number
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewProjects"    
+    post:
+      tags:
+        - "Project"
+      summary: create a new project
+      operationId: postProject
+      requestBody:
+        required: true
+        description: new project
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewProjects"
+      responses:
+        200:
+          description: OK
+          content:
+             application/json:
+              schema:
+                $ref: "#/components/schemas/Projects"  
+        400:
+          description: Error
+          content: {}
+    put:
+      tags:
+        - "Project"
+      summary: modify entirely the project
+      requestBody:
+        required: true
+        description: modify project
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/NewProjects"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Projects"
+    patch:
+      tags:
+        - "Project"
+      description: |
+        Possible to change on : 
+        * Durer : change
+        * name : change
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Projects"
+            examples:
+              changeDuration:
+                summary: change 
+                value:
+                  - id: 1
+                    durer: "1month"
+              changeName:
+                summary: change
+                value:
+                  - id: 2
+                    name: ""
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Projects"
+    
+                    
+                
+        
+  /project/{id}:
+    get:
+      tags:
+        - "Project"
+      summary: Get project with a specified id
+      operationId: getProjectById
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: sucsses
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewProjects"
+
+    delete:
+      tags:
+        - "Project"
+      summary: delete project with a specified id
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Project with this id is deletete"
+        400:
+          description:  Error
+          content: {}
+  /user:
+    get:
+      tags:
+        - "User"
+      summary: Get all User 
+      responses:
+        200: 
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NewUser"
+    put:
+      tags:
+        - "User"
+      summary: modify entirely the User
+      requestBody:
+        required: true
+        description: modify the user
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/NewUser"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                $ref: "#/components/schemas/NewUser"
+    patch:
+      tags:
+        - "User"
+      description: |
+          Possible to change on :
+            - name
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              items:
+                $ref: "#/components/schemas/NewUser" 
+            examples:
+              changefirst_Name:
+                summary: change name of person
+                value:
+                  - id: 1
+                    name: Miranda
+              changeEmail:
+                summary: modify the email of person
+                value:
+                  email: Miranda@gmail.com
+                
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NewUser" 
+     
+
+  /user/{id}:
+    get: 
+      tags:
+        - "User"
+      summary: Get User of specified id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/NewUser"
+    delete:
+      tags:
+        - "User"
+      summary: Delete User of a specified id
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Deleted User succes  "
+  /task:
+    get: 
+      tags:
+        - "Task"
+      summary: Get Task of specified id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/Task"
+    put:
+      tags:
+        - "Task"
+      summary: modify entirely the Task
+      requestBody:
+        required: true
+        description: modify the task
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Task"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                $ref: "#/components/schemas/Task"    
+  /role:
+    get:
+      tags:
+        - "Role"
+      summary: get role of user
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                $ref: "#/components/schemas/Role"
+  /role/{id}:
+    get:
+      tags:
+        - "Role"
+      summary: get a role with specific id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                $ref: "#/components/schemas/Role"
+  /status:
+    get:
+      tags:
+        - "Status"
+      summary: get status of user
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                $ref: "#/components/schemas/Status"              
+  /status/{id}:
+    get:
+      tags:
+        - "Status"
+      summary: get a status with specific id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                $ref: "#/components/schemas/Status"
+
+components:
+  schemas:
+    NewProjects:
+      type: object
+      properties:
+        name: 
+          type: string
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date
+    Projects:
+      type: object
+      properties:
+        id:
+          type: number
+        projects:
+          $ref: "#/components/schemas/NewProjects"
+        task:
+          $ref: "#/components/schemas/Task"
+    NewUser:
+      type: object
+      properties:
+        id:
+          type: number
+        email:
+          type: string
+          example: "caranja@gmail.com"
+        last_name:
+          type: string
+          example: "Yuri"
+        first_name:
+          type: string
+          example: "Caranja"
+        password:
+          type: string 
+        role:
+          $ref: "#/components/schemas/Role"     
+
+    User: 
+      type: object
+      properties:
+        id:
+          type: number
+        new_user:
+          $ref: "#components/schemas/NewUser"
+         
+    Role:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+          example: developpeur_back      
+
+    Task:
+      type: object
+      properties:
+        id:
+          type: number
+        title:
+          type: string
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        Status:
+          $ref:  "#components/schemas/Status"
+    Status:
+      type: object
+      properties:
+        name:
+          type: string 
+          example: to do 
+           
+
+    
+
+
+     
+       
+
+ 
+
